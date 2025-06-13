@@ -1,2 +1,1 @@
-# Gumcli
-GumCli - Git User Manager Command Line Interface
+# GumCli - Git User Manager Command Line Interface
