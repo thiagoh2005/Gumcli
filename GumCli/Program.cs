@@ -4,8 +4,6 @@ using Newtonsoft.Json;
 using System.Diagnostics;
 using System.Text;
 using System.CommandLine.Parsing;
-using System.Xml.Linq;
-using System.Collections.Generic;
 
 namespace gum;
 
@@ -130,13 +128,6 @@ class Program
         GumConfig gumConfig = new GumConfig();
         gumConfig.ConfigList = ReadGumJson();
 
-        /*Process process = new Process();
-        process.StartInfo.FileName = "cmd.exe";
-        process.StartInfo.Arguments = "/c git config --list";
-        process.StartInfo.RedirectStandardOutput = true;
-        process.Start();
-        process.WaitForExit();
-        process.StandardOutput.ReadToEnd();*/
         string output = (string)RunProcess("git config --list", true);
 
         List<string> lines = output.Split('\n').Where(line => line !=  "").ToList();
@@ -238,13 +229,6 @@ class Program
         }
 
         var configItem = gumConfig.ConfigList[configItemIndex];
-
-        /*Process process = new Process();
-        process.StartInfo.FileName = "cmd.exe";
-        process.StartInfo.Arguments = "/c git config --global user.name";
-        process.StartInfo.RedirectStandardOutput = true;
-        process.Start();
-        process.WaitForExit();*/
 
         RunProcess($"git config --global user.name \"{configItem.Name}\" ");
         RunProcess($"git config --global user.email \"{configItem.Email}\" ");
